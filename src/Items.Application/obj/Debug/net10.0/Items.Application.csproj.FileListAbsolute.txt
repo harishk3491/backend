@@ -1,0 +1,15 @@
+D:\Uniphore\src\Items\backend\src\Items.Application\bin\Debug\net10.0\Items.Application.deps.json
+D:\Uniphore\src\Items\backend\src\Items.Application\bin\Debug\net10.0\Items.Application.dll
+D:\Uniphore\src\Items\backend\src\Items.Application\bin\Debug\net10.0\Items.Application.pdb
+D:\Uniphore\src\Items\backend\src\Items.Application\bin\Debug\net10.0\Items.Domain.dll
+D:\Uniphore\src\Items\backend\src\Items.Application\bin\Debug\net10.0\Items.Domain.pdb
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.csproj.AssemblyReference.cache
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.AssemblyInfoInputs.cache
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.AssemblyInfo.cs
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.csproj.CoreCompileInputs.cache
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Ap.3D90B637.Up2Date
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.dll
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\refint\Items.Application.dll
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\Items.Application.pdb
+D:\Uniphore\src\Items\backend\src\Items.Application\obj\Debug\net10.0\ref\Items.Application.dll

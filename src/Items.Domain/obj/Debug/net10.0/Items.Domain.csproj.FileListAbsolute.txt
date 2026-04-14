@@ -1,0 +1,11 @@
+D:\Uniphore\src\Items\backend\src\Items.Domain\bin\Debug\net10.0\Items.Domain.deps.json
+D:\Uniphore\src\Items\backend\src\Items.Domain\bin\Debug\net10.0\Items.Domain.dll
+D:\Uniphore\src\Items\backend\src\Items.Domain\bin\Debug\net10.0\Items.Domain.pdb
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.AssemblyInfoInputs.cache
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.AssemblyInfo.cs
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.csproj.CoreCompileInputs.cache
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.dll
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\refint\Items.Domain.dll
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.pdb
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\ref\Items.Domain.dll

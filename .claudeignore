@@ -1,0 +1,10 @@
+# .claudeignore
+bin/
+obj/
+.vs/
+*.user
+*.suo
+node_modules/
+dist/
+Migrations/
+*.Designer.cs

@@ -1,0 +1,35 @@
+using Items.Domain.Enums;
+
+namespace Items.Application.ItemSettings.Dtos;
+
+public class ItemSettingsDto
+{
+    public int Id { get; set; }
+
+    // Section 1: Core Identity & Governance
+    public int ItemCodeMaxLength { get; set; }
+    public bool AllowItemLevelCustomization { get; set; }
+    public bool LogItemClassOverrides { get; set; }
+    public bool AllowDuplicateNames { get; set; }
+    public bool AllowTagNumberInSalesDocs { get; set; }
+
+    // Section 2: Automated Tracking Logic
+    public bool EnableAutoBatchSerialGeneration { get; set; }
+    public string? AutoGenPrefix { get; set; }
+    public string? AutoGenSuffix { get; set; }
+    public string? AutoGenSeparator { get; set; }
+    public int? AutoGenSequenceStart { get; set; }
+    public int? AutoGenSequenceIncrement { get; set; }
+
+    // Section 3: Copy & Duplication Rules
+    public bool CopyDescription { get; set; }
+    public bool CopyTechnicalSpecs { get; set; }
+    public bool CopyPricingDetails { get; set; }
+    public bool CopyTaxDetails { get; set; }
+    public bool CopyItemClassDefaults { get; set; }
+    public bool CopyAttachments { get; set; }
+
+    // Section 4: ECN and CCN Settings
+    public bool EcnEntryPermission { get; set; }
+    public CcnNumberingBasis CcnNumberingBasis { get; set; }
+}

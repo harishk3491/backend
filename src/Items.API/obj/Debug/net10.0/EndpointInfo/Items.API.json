@@ -1,0 +1,5212 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Items API",
+    "description": "Item microservice — manages items, classes, UOMs, vendor mappings, and price lists.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/item-classes": {
+      "get": {
+        "tags": [
+          "Item Classes"
+        ],
+        "summary": "Returns a paginated list of active item classes.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number (1-based).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of records per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemClassSummaryDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Item Classes"
+        ],
+        "summary": "Creates a new item class.",
+        "requestBody": {
+          "description": "The item class to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemClassRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemClassRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemClassRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemClassDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/item-classes/{id}": {
+      "get": {
+        "tags": [
+          "Item Classes"
+        ],
+        "summary": "Returns a single item class by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The item class ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemClassDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Item Classes"
+        ],
+        "summary": "Updates an existing item class (ItemNature is non-editable post-create).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The item class ID to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated item class values.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemClassRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemClassRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemClassRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemClassDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Item Classes"
+        ],
+        "summary": "Soft-deletes an item class.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The item class ID to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/item-classes/{id}/clone": {
+      "post": {
+        "tags": [
+          "Item Classes"
+        ],
+        "summary": "Clones an item class with a new code and name.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The source item class ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The new code and name for the clone.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemClassRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemClassRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemClassRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemClassDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/item-settings": {
+      "get": {
+        "tags": [
+          "Item Settings"
+        ],
+        "summary": "Returns the singleton item settings record (defaults if never saved).",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSettingsDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Item Settings"
+        ],
+        "summary": "Creates or updates the singleton item settings.",
+        "requestBody": {
+          "description": "The settings values to apply.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemSettingsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemSettingsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemSettingsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSettingsDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/item-vendor-mappings": {
+      "get": {
+        "tags": [
+          "Item Vendor Mappings"
+        ],
+        "summary": "Returns a paginated list of vendor mappings; filterable by itemId and vendorId.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number (1-based).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of records per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "Filter by item ID.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "vendorId",
+            "in": "query",
+            "description": "Filter by vendor ID.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemVendorMappingSummaryDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Item Vendor Mappings"
+        ],
+        "summary": "Creates a vendor-item mapping with purchase UOM grid and pricing.",
+        "requestBody": {
+          "description": "The vendor mapping to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemVendorMappingRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemVendorMappingRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemVendorMappingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemVendorMappingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/item-vendor-mappings/{id}": {
+      "get": {
+        "tags": [
+          "Item Vendor Mappings"
+        ],
+        "summary": "Returns a full vendor mapping with purchase UOM grid and pricing slabs.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The vendor mapping ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemVendorMappingDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Item Vendor Mappings"
+        ],
+        "summary": "Updates a vendor mapping (ItemId and VendorId are non-editable post-create).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The vendor mapping ID to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated values. UOM grid and pricing collections are fully replaced.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemVendorMappingRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemVendorMappingRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemVendorMappingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemVendorMappingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Item Vendor Mappings"
+        ],
+        "summary": "Soft-deletes a vendor mapping (blocked if referenced in an active PO).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The vendor mapping ID to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/item-vendor-mappings/{id}/clone": {
+      "post": {
+        "tags": [
+          "Item Vendor Mappings"
+        ],
+        "summary": "Clones a vendor mapping, optionally targeting a different item or vendor.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The source vendor mapping ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Optional override for target item or vendor; clone is never preferred by default.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemVendorMappingRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemVendorMappingRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemVendorMappingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemVendorMappingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/items": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Returns a paginated list of items; filterable by class, type, and nature.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number (1-based).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of records per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "itemClassId",
+            "in": "query",
+            "description": "Filter by item class ID.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "itemType",
+            "in": "query",
+            "description": "Filter by item type enum value.",
+            "schema": {
+              "enum": [
+                "RM",
+                "BO",
+                "RS",
+                "MK",
+                "AS",
+                "SP",
+                "TL",
+                "CP",
+                "CO",
+                "SR"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemNature",
+            "in": "query",
+            "description": "Filter by item nature (Goods or Service).",
+            "schema": {
+              "enum": [
+                "Goods",
+                "Service"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSummaryDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Creates a new item with all sub-entities.",
+        "requestBody": {
+          "description": "The item to create including alternate UOMs, specs, drawings, and thresholds.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/items/{id}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Returns a full item record including all sub-entities.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The item ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Updates an item (ItemNature and dimension flags are non-editable post-create).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The item ID to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated item values. Sub-entity collections are fully replaced.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Soft-deletes an item (blocked if transaction history exists).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The item ID to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/items/{id}/clone": {
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Deep-clones an item including all sub-entities.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The source item ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The new name and SKU for the clone.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/price-lists": {
+      "get": {
+        "tags": [
+          "Price Lists"
+        ],
+        "summary": "Returns a paginated list of price lists ordered by priority (highest first).",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number (1-based).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of records per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceListSummaryDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Price Lists"
+        ],
+        "summary": "Creates a price list with pricing slabs.",
+        "requestBody": {
+          "description": "The price list to create including line items.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePriceListRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePriceListRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePriceListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceListDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/price-lists/{id}": {
+      "get": {
+        "tags": [
+          "Price Lists"
+        ],
+        "summary": "Returns a price list with all pricing slabs.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The price list ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceListDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Price Lists"
+        ],
+        "summary": "Updates a price list (ApplicableTo is non-editable post-create).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The price list ID to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated values. Line items collection is fully replaced.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePriceListRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePriceListRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePriceListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceListDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Price Lists"
+        ],
+        "summary": "Soft-deletes a price list (blocked if linked to an active SO or contract).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The price list ID to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/price-lists/{id}/clone": {
+      "post": {
+        "tags": [
+          "Price Lists"
+        ],
+        "summary": "Clones a price list as Draft with a new name.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The source price list ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The new name for the clone.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClonePriceListRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClonePriceListRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClonePriceListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceListDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/uoms": {
+      "get": {
+        "tags": [
+          "Units of Measure"
+        ],
+        "summary": "Returns all active UOMs.",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UomDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Units of Measure"
+        ],
+        "summary": "Creates a new UOM.",
+        "requestBody": {
+          "description": "The UOM to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUomRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUomRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUomRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UomDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/uoms/{id}": {
+      "get": {
+        "tags": [
+          "Units of Measure"
+        ],
+        "summary": "Returns a single UOM by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The UOM ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UomDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Units of Measure"
+        ],
+        "summary": "Updates an existing UOM.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The UOM ID to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated UOM values.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUomRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUomRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUomRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UomDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Units of Measure"
+        ],
+        "summary": "Soft-deletes a UOM (blocked if used on any item).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The UOM ID to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CloneItemClassRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CloneItemRequest": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CloneItemVendorMappingRequest": {
+        "type": "object",
+        "properties": {
+          "overrideItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "overrideVendorId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClonePriceListRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemAlternateUomRequest": {
+        "type": "object",
+        "properties": {
+          "uomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conversionFactor": {
+            "type": "number",
+            "format": "double"
+          },
+          "isPerfect": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemClassRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemNature": {
+            "enum": [
+              "Goods",
+              "Service"
+            ],
+            "type": "string"
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "purchasable": {
+            "type": "boolean"
+          },
+          "saleable": {
+            "type": "boolean"
+          },
+          "inventoryManaged": {
+            "type": "boolean"
+          },
+          "valuationMethod": {
+            "enum": [
+              "Fifo",
+              "MovingAverage",
+              "Standard"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "allowExcessGrnPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "issueMethod": {
+            "enum": [
+              "Manual",
+              "Backflush"
+            ],
+            "type": "string"
+          },
+          "woReceiptCostingViaExtraIssue": {
+            "type": "boolean"
+          },
+          "traceabilityLevel": {
+            "enum": [
+              "None",
+              "Batch",
+              "Serial"
+            ],
+            "type": "string"
+          },
+          "inwardNumberTracking": {
+            "type": "boolean"
+          },
+          "heatNumberTracking": {
+            "type": "boolean"
+          },
+          "shelfLifeApplicable": {
+            "type": "boolean"
+          },
+          "allowIssueIfExpired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignoreDayInExpiry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cannotSellExpiredInNextDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qcRequired": {
+            "type": "boolean"
+          },
+          "tpiRequired": {
+            "type": "boolean"
+          },
+          "tpiTriggerStage": {
+            "enum": [
+              "BeforeGrnForByItem",
+              "PostProduction",
+              "PreDispatch",
+              "PostDelivery"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "tpiCertificateMandatory": {
+            "type": "boolean"
+          },
+          "tpiCaptureRemarks": {
+            "type": "boolean"
+          },
+          "blockDispatchUntilTpiAccepted": {
+            "type": "boolean"
+          },
+          "allowTpiOverrideAtSo": {
+            "type": "boolean"
+          },
+          "indentMandatory": {
+            "type": "boolean"
+          },
+          "fastMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "slowMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumProductionLogic": {
+            "type": "boolean"
+          },
+          "minimumProductionQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productionBatchMultiple": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "autoAllocation": {
+            "type": "boolean"
+          },
+          "autoAllocationOn": {
+            "enum": [
+              "WoReceipt",
+              "ProductionBooking"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "dimensionBasedItem": {
+            "type": "boolean"
+          },
+          "bomQtyInWeightLengthWithDimensions": {
+            "type": "boolean"
+          },
+          "needDimensionWiseStockKeeping": {
+            "type": "boolean"
+          },
+          "needDimensionWiseConsumptionInBom": {
+            "type": "boolean"
+          },
+          "longItem": {
+            "type": "boolean"
+          },
+          "bomQtyInDimensionsAndPieces": {
+            "type": "boolean"
+          },
+          "salesAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccount": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemDrawingRequest": {
+        "type": "object",
+        "properties": {
+          "drawingName": {
+            "type": "string",
+            "nullable": true
+          },
+          "drawingNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "revision": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "type": "string",
+            "nullable": true
+          },
+          "showInProductionBooking": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "variantName": {
+            "type": "string",
+            "nullable": true
+          },
+          "variantCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemClassId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemNature": {
+            "enum": [
+              "Goods",
+              "Service"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "referenceCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "kanbanItem": {
+            "type": "boolean"
+          },
+          "mmfgItem": {
+            "type": "boolean"
+          },
+          "minMassManufacturingQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "wantQrCode": {
+            "type": "boolean"
+          },
+          "purchasable": {
+            "type": "boolean"
+          },
+          "saleable": {
+            "type": "boolean"
+          },
+          "inventoryManaged": {
+            "type": "boolean"
+          },
+          "valuationMethod": {
+            "enum": [
+              "Fifo",
+              "MovingAverage",
+              "Standard"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "allowExcessGrnPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "issueMethod": {
+            "enum": [
+              "Manual",
+              "Backflush"
+            ],
+            "type": "string"
+          },
+          "woReceiptCostingViaExtraIssue": {
+            "type": "boolean"
+          },
+          "traceabilityLevel": {
+            "enum": [
+              "None",
+              "Batch",
+              "Serial"
+            ],
+            "type": "string"
+          },
+          "inwardNumberTracking": {
+            "type": "boolean"
+          },
+          "heatNumberTracking": {
+            "type": "boolean"
+          },
+          "shelfLifeApplicable": {
+            "type": "boolean"
+          },
+          "allowIssueIfExpired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignoreDayInExpiry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cannotSellExpiredInNextDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qcRequired": {
+            "type": "boolean"
+          },
+          "tpiRequired": {
+            "type": "boolean"
+          },
+          "tpiTriggerStage": {
+            "enum": [
+              "BeforeGrnForByItem",
+              "PostProduction",
+              "PreDispatch",
+              "PostDelivery"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "tpiCertificateMandatory": {
+            "type": "boolean"
+          },
+          "tpiCaptureRemarks": {
+            "type": "boolean"
+          },
+          "blockDispatchUntilTpiAccepted": {
+            "type": "boolean"
+          },
+          "allowTpiOverrideAtSo": {
+            "type": "boolean"
+          },
+          "indentMandatory": {
+            "type": "boolean"
+          },
+          "fastMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "slowMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumProductionLogic": {
+            "type": "boolean"
+          },
+          "minimumProductionQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productionBatchMultiple": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "autoAllocation": {
+            "type": "boolean"
+          },
+          "autoAllocationOn": {
+            "enum": [
+              "WoReceipt",
+              "ProductionBooking"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "dimensionBasedItem": {
+            "type": "boolean"
+          },
+          "needDimensionWiseStockKeeping": {
+            "type": "boolean"
+          },
+          "needDimensionWiseConsumptionInBom": {
+            "type": "boolean"
+          },
+          "longItem": {
+            "type": "boolean"
+          },
+          "bomQtyInDimensionsAndPieces": {
+            "type": "boolean"
+          },
+          "salesAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialOfConstruction": {
+            "type": "string",
+            "nullable": true
+          },
+          "standardWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hsnSacCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxPreference": {
+            "enum": [
+              "Taxable",
+              "NonTaxable"
+            ],
+            "type": "string"
+          },
+          "taxRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "countryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "salesPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "subContractingCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "discountEligible": {
+            "type": "boolean"
+          },
+          "isToolConsumable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "consumptionType": {
+            "enum": [
+              "OneTime",
+              "MultipleTimes",
+              "OverPeriod"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "consumptionNumberOfTimes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumptionPeriodValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumptionPeriodUnit": {
+            "enum": [
+              "Hours",
+              "Days",
+              "Months"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "consumptionStartBasis": {
+            "enum": [
+              "Grn",
+              "FirstIssue"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "maintenanceFrequencyValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maintenanceFrequencyUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "UsageCycles"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "calibrationRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "calibrationFrequencyValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "calibrationFrequencyUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "UsageCycles"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "maximumCapacity": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "postExhaustionAction": {
+            "enum": [
+              "MarkAsScrap",
+              "MoveToMaintenance",
+              "RemoveFromInventory"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "alternateUoms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemAlternateUomRequest"
+            },
+            "nullable": true
+          },
+          "technicalSpecs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemTechnicalSpecRequest"
+            },
+            "nullable": true
+          },
+          "drawings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemDrawingRequest"
+            },
+            "nullable": true
+          },
+          "warehouseThresholds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemWarehouseThresholdRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemTechnicalSpecRequest": {
+        "type": "object",
+        "properties": {
+          "capabilityType": {
+            "type": "string",
+            "nullable": true
+          },
+          "capabilityValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemVendorMappingRequest": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorItemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorSku": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPreferredVendor": {
+            "type": "boolean"
+          },
+          "moq": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxOrderQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "eoq": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "standardLeadTimeDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warrantyDuration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "warrantyDurationUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "Years"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyStartBasis": {
+            "enum": [
+              "FromInvoiceDate",
+              "FromDeliveryDate",
+              "FromGrnDate"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseUoms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemVendorPurchaseUomRequest"
+            },
+            "nullable": true
+          },
+          "pricings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemVendorPricingRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemVendorPricingRequest": {
+        "type": "object",
+        "properties": {
+          "basePurchasePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "discountType": {
+            "enum": [
+              "Percent",
+              "FixedAmount"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceValidFrom": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "priceValidTo": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "paymentTerms": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemVendorPurchaseUomRequest": {
+        "type": "object",
+        "properties": {
+          "purchaseUomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isPerfectConversion": {
+            "type": "boolean"
+          },
+          "conversionRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "tolerancePercent": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemWarehouseThresholdRequest": {
+        "type": "object",
+        "properties": {
+          "warehouseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "minThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "reorderQty": {
+            "type": "number",
+            "format": "double"
+          },
+          "openingQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "openingRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "openingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatePriceListItemRequest": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemClassId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "maxQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "basePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountType": {
+            "enum": [
+              "Percent",
+              "FixedAmount"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "roundOffTo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatePriceListRequest": {
+        "type": "object",
+        "properties": {
+          "applicableTo": {
+            "enum": [
+              "Sales",
+              "Purchase"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "enum": [
+              "Draft",
+              "Active",
+              "Inactive",
+              "Expired"
+            ],
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetType": {
+            "enum": [
+              "AllCustomers",
+              "SpecificCustomers",
+              "AllVendors",
+              "SpecificVendors",
+              "Region"
+            ],
+            "type": "string"
+          },
+          "targetIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricingScopeType": {
+            "enum": [
+              "AllItems",
+              "SelectedItems",
+              "SelectedItemClasses"
+            ],
+            "type": "string"
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreatePriceListItemRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUomRequest": {
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemAlternateUomDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "conversionFactor": {
+            "type": "number",
+            "format": "double"
+          },
+          "isPerfect": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemClassDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemNature": {
+            "enum": [
+              "Goods",
+              "Service"
+            ],
+            "type": "string"
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "purchasable": {
+            "type": "boolean"
+          },
+          "saleable": {
+            "type": "boolean"
+          },
+          "inventoryManaged": {
+            "type": "boolean"
+          },
+          "valuationMethod": {
+            "enum": [
+              "Fifo",
+              "MovingAverage",
+              "Standard"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "allowExcessGrnPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "issueMethod": {
+            "enum": [
+              "Manual",
+              "Backflush"
+            ],
+            "type": "string"
+          },
+          "woReceiptCostingViaExtraIssue": {
+            "type": "boolean"
+          },
+          "traceabilityLevel": {
+            "enum": [
+              "None",
+              "Batch",
+              "Serial"
+            ],
+            "type": "string"
+          },
+          "inwardNumberTracking": {
+            "type": "boolean"
+          },
+          "heatNumberTracking": {
+            "type": "boolean"
+          },
+          "shelfLifeApplicable": {
+            "type": "boolean"
+          },
+          "allowIssueIfExpired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignoreDayInExpiry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cannotSellExpiredInNextDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qcRequired": {
+            "type": "boolean"
+          },
+          "tpiRequired": {
+            "type": "boolean"
+          },
+          "tpiTriggerStage": {
+            "enum": [
+              "BeforeGrnForByItem",
+              "PostProduction",
+              "PreDispatch",
+              "PostDelivery"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "tpiCertificateMandatory": {
+            "type": "boolean"
+          },
+          "tpiCaptureRemarks": {
+            "type": "boolean"
+          },
+          "blockDispatchUntilTpiAccepted": {
+            "type": "boolean"
+          },
+          "allowTpiOverrideAtSo": {
+            "type": "boolean"
+          },
+          "indentMandatory": {
+            "type": "boolean"
+          },
+          "fastMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "slowMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumProductionLogic": {
+            "type": "boolean"
+          },
+          "minimumProductionQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productionBatchMultiple": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "autoAllocation": {
+            "type": "boolean"
+          },
+          "autoAllocationOn": {
+            "enum": [
+              "WoReceipt",
+              "ProductionBooking"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "dimensionBasedItem": {
+            "type": "boolean"
+          },
+          "bomQtyInWeightLengthWithDimensions": {
+            "type": "boolean"
+          },
+          "needDimensionWiseStockKeeping": {
+            "type": "boolean"
+          },
+          "needDimensionWiseConsumptionInBom": {
+            "type": "boolean"
+          },
+          "longItem": {
+            "type": "boolean"
+          },
+          "bomQtyInDimensionsAndPieces": {
+            "type": "boolean"
+          },
+          "salesAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemClassSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemNature": {
+            "enum": [
+              "Goods",
+              "Service"
+            ],
+            "type": "string"
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemClassSummaryDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemClassSummaryDto"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemDrawingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "drawingName": {
+            "type": "string",
+            "nullable": true
+          },
+          "drawingNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "revision": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "type": "string",
+            "nullable": true
+          },
+          "showInProductionBooking": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "variantName": {
+            "type": "string",
+            "nullable": true
+          },
+          "variantCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemClassId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemClassName": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemNature": {
+            "enum": [
+              "Goods",
+              "Service"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "referenceCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "kanbanItem": {
+            "type": "boolean"
+          },
+          "mmfgItem": {
+            "type": "boolean"
+          },
+          "minMassManufacturingQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "wantQrCode": {
+            "type": "boolean"
+          },
+          "purchasable": {
+            "type": "boolean"
+          },
+          "saleable": {
+            "type": "boolean"
+          },
+          "inventoryManaged": {
+            "type": "boolean"
+          },
+          "valuationMethod": {
+            "enum": [
+              "Fifo",
+              "MovingAverage",
+              "Standard"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "allowExcessGrnPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "issueMethod": {
+            "enum": [
+              "Manual",
+              "Backflush"
+            ],
+            "type": "string"
+          },
+          "woReceiptCostingViaExtraIssue": {
+            "type": "boolean"
+          },
+          "traceabilityLevel": {
+            "enum": [
+              "None",
+              "Batch",
+              "Serial"
+            ],
+            "type": "string"
+          },
+          "inwardNumberTracking": {
+            "type": "boolean"
+          },
+          "heatNumberTracking": {
+            "type": "boolean"
+          },
+          "shelfLifeApplicable": {
+            "type": "boolean"
+          },
+          "allowIssueIfExpired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignoreDayInExpiry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cannotSellExpiredInNextDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qcRequired": {
+            "type": "boolean"
+          },
+          "tpiRequired": {
+            "type": "boolean"
+          },
+          "tpiTriggerStage": {
+            "enum": [
+              "BeforeGrnForByItem",
+              "PostProduction",
+              "PreDispatch",
+              "PostDelivery"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "tpiCertificateMandatory": {
+            "type": "boolean"
+          },
+          "tpiCaptureRemarks": {
+            "type": "boolean"
+          },
+          "blockDispatchUntilTpiAccepted": {
+            "type": "boolean"
+          },
+          "allowTpiOverrideAtSo": {
+            "type": "boolean"
+          },
+          "indentMandatory": {
+            "type": "boolean"
+          },
+          "fastMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "slowMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumProductionLogic": {
+            "type": "boolean"
+          },
+          "minimumProductionQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productionBatchMultiple": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "autoAllocation": {
+            "type": "boolean"
+          },
+          "autoAllocationOn": {
+            "enum": [
+              "WoReceipt",
+              "ProductionBooking"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "dimensionBasedItem": {
+            "type": "boolean"
+          },
+          "needDimensionWiseStockKeeping": {
+            "type": "boolean"
+          },
+          "needDimensionWiseConsumptionInBom": {
+            "type": "boolean"
+          },
+          "longItem": {
+            "type": "boolean"
+          },
+          "bomQtyInDimensionsAndPieces": {
+            "type": "boolean"
+          },
+          "salesAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseUomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialOfConstruction": {
+            "type": "string",
+            "nullable": true
+          },
+          "standardWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hsnSacCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxPreference": {
+            "enum": [
+              "Taxable",
+              "NonTaxable"
+            ],
+            "type": "string"
+          },
+          "taxRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "countryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "salesPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "subContractingCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "discountEligible": {
+            "type": "boolean"
+          },
+          "isToolConsumable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "consumptionType": {
+            "enum": [
+              "OneTime",
+              "MultipleTimes",
+              "OverPeriod"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "consumptionNumberOfTimes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumptionPeriodValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumptionPeriodUnit": {
+            "enum": [
+              "Hours",
+              "Days",
+              "Months"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "consumptionStartBasis": {
+            "enum": [
+              "Grn",
+              "FirstIssue"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "maintenanceFrequencyValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maintenanceFrequencyUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "UsageCycles"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "calibrationRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "calibrationFrequencyValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "calibrationFrequencyUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "UsageCycles"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "maximumCapacity": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "postExhaustionAction": {
+            "enum": [
+              "MarkAsScrap",
+              "MoveToMaintenance",
+              "RemoveFromInventory"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "alternateUoms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemAlternateUomDto"
+            },
+            "nullable": true
+          },
+          "technicalSpecs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemTechnicalSpecDto"
+            },
+            "nullable": true
+          },
+          "drawings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemDrawingDto"
+            },
+            "nullable": true
+          },
+          "warehouseThresholds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemWarehouseThresholdDto"
+            },
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemSettingsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCodeMaxLength": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowItemLevelCustomization": {
+            "type": "boolean"
+          },
+          "logItemClassOverrides": {
+            "type": "boolean"
+          },
+          "allowDuplicateNames": {
+            "type": "boolean"
+          },
+          "allowTagNumberInSalesDocs": {
+            "type": "boolean"
+          },
+          "enableAutoBatchSerialGeneration": {
+            "type": "boolean"
+          },
+          "autoGenPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "autoGenSuffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "autoGenSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "autoGenSequenceStart": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "autoGenSequenceIncrement": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "copyDescription": {
+            "type": "boolean"
+          },
+          "copyTechnicalSpecs": {
+            "type": "boolean"
+          },
+          "copyPricingDetails": {
+            "type": "boolean"
+          },
+          "copyTaxDetails": {
+            "type": "boolean"
+          },
+          "copyItemClassDefaults": {
+            "type": "boolean"
+          },
+          "copyAttachments": {
+            "type": "boolean"
+          },
+          "ecnEntryPermission": {
+            "type": "boolean"
+          },
+          "ccnNumberingBasis": {
+            "enum": [
+              "ParentItem",
+              "SalesJobOrder"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemClassName": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemNature": {
+            "enum": [
+              "Goods",
+              "Service"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "baseUomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemSummaryDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemSummaryDto"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemTechnicalSpecDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "capabilityType": {
+            "type": "string",
+            "nullable": true
+          },
+          "capabilityValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemVendorMappingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorItemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorSku": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPreferredVendor": {
+            "type": "boolean"
+          },
+          "moq": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxOrderQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "eoq": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "standardLeadTimeDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warrantyDuration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "warrantyDurationUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "Years"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyStartBasis": {
+            "enum": [
+              "FromInvoiceDate",
+              "FromDeliveryDate",
+              "FromGrnDate"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "purchaseUoms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemVendorPurchaseUomDto"
+            },
+            "nullable": true
+          },
+          "pricings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemVendorPricingDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemVendorMappingSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isPreferredVendor": {
+            "type": "boolean"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemVendorMappingSummaryDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemVendorMappingSummaryDto"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemVendorPricingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "basePurchasePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "discountType": {
+            "enum": [
+              "Percent",
+              "FixedAmount"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "effectivePurchasePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "priceValidFrom": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "priceValidTo": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "paymentTerms": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemVendorPurchaseUomDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "purchaseUomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "purchaseUomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPerfectConversion": {
+            "type": "boolean"
+          },
+          "conversionRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "tolerancePercent": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemWarehouseThresholdDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warehouseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "minThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "reorderQty": {
+            "type": "number",
+            "format": "double"
+          },
+          "openingQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "openingRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "openingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PriceListDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "applicableTo": {
+            "enum": [
+              "Sales",
+              "Purchase"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "enum": [
+              "Draft",
+              "Active",
+              "Inactive",
+              "Expired"
+            ],
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetType": {
+            "enum": [
+              "AllCustomers",
+              "SpecificCustomers",
+              "AllVendors",
+              "SpecificVendors",
+              "Region"
+            ],
+            "type": "string"
+          },
+          "targetIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricingScopeType": {
+            "enum": [
+              "AllItems",
+              "SelectedItems",
+              "SelectedItemClasses"
+            ],
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PriceListItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PriceListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemClassId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemClassName": {
+            "type": "string",
+            "nullable": true
+          },
+          "minQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "maxQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "basePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountType": {
+            "enum": [
+              "Percent",
+              "FixedAmount"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "finalUnitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "roundOffTo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PriceListSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "applicableTo": {
+            "enum": [
+              "Sales",
+              "Purchase"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "Draft",
+              "Active",
+              "Inactive",
+              "Expired"
+            ],
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PriceListSummaryDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PriceListSummaryDto"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "UomDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateItemClassRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "purchasable": {
+            "type": "boolean"
+          },
+          "saleable": {
+            "type": "boolean"
+          },
+          "inventoryManaged": {
+            "type": "boolean"
+          },
+          "valuationMethod": {
+            "enum": [
+              "Fifo",
+              "MovingAverage",
+              "Standard"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "allowExcessGrnPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "issueMethod": {
+            "enum": [
+              "Manual",
+              "Backflush"
+            ],
+            "type": "string"
+          },
+          "woReceiptCostingViaExtraIssue": {
+            "type": "boolean"
+          },
+          "traceabilityLevel": {
+            "enum": [
+              "None",
+              "Batch",
+              "Serial"
+            ],
+            "type": "string"
+          },
+          "inwardNumberTracking": {
+            "type": "boolean"
+          },
+          "heatNumberTracking": {
+            "type": "boolean"
+          },
+          "shelfLifeApplicable": {
+            "type": "boolean"
+          },
+          "allowIssueIfExpired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignoreDayInExpiry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cannotSellExpiredInNextDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qcRequired": {
+            "type": "boolean"
+          },
+          "tpiRequired": {
+            "type": "boolean"
+          },
+          "tpiTriggerStage": {
+            "enum": [
+              "BeforeGrnForByItem",
+              "PostProduction",
+              "PreDispatch",
+              "PostDelivery"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "tpiCertificateMandatory": {
+            "type": "boolean"
+          },
+          "tpiCaptureRemarks": {
+            "type": "boolean"
+          },
+          "blockDispatchUntilTpiAccepted": {
+            "type": "boolean"
+          },
+          "allowTpiOverrideAtSo": {
+            "type": "boolean"
+          },
+          "indentMandatory": {
+            "type": "boolean"
+          },
+          "fastMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "slowMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumProductionLogic": {
+            "type": "boolean"
+          },
+          "minimumProductionQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productionBatchMultiple": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "autoAllocation": {
+            "type": "boolean"
+          },
+          "autoAllocationOn": {
+            "enum": [
+              "WoReceipt",
+              "ProductionBooking"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "dimensionBasedItem": {
+            "type": "boolean"
+          },
+          "bomQtyInWeightLengthWithDimensions": {
+            "type": "boolean"
+          },
+          "needDimensionWiseStockKeeping": {
+            "type": "boolean"
+          },
+          "needDimensionWiseConsumptionInBom": {
+            "type": "boolean"
+          },
+          "longItem": {
+            "type": "boolean"
+          },
+          "bomQtyInDimensionsAndPieces": {
+            "type": "boolean"
+          },
+          "salesAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccount": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateItemRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemType": {
+            "enum": [
+              "RM",
+              "BO",
+              "RS",
+              "MK",
+              "AS",
+              "SP",
+              "TL",
+              "CP",
+              "CO",
+              "SR"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "referenceCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "kanbanItem": {
+            "type": "boolean"
+          },
+          "mmfgItem": {
+            "type": "boolean"
+          },
+          "minMassManufacturingQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "wantQrCode": {
+            "type": "boolean"
+          },
+          "purchasable": {
+            "type": "boolean"
+          },
+          "saleable": {
+            "type": "boolean"
+          },
+          "inventoryManaged": {
+            "type": "boolean"
+          },
+          "valuationMethod": {
+            "enum": [
+              "Fifo",
+              "MovingAverage",
+              "Standard"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "allowExcessGrnPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "issueMethod": {
+            "enum": [
+              "Manual",
+              "Backflush"
+            ],
+            "type": "string"
+          },
+          "woReceiptCostingViaExtraIssue": {
+            "type": "boolean"
+          },
+          "traceabilityLevel": {
+            "enum": [
+              "None",
+              "Batch",
+              "Serial"
+            ],
+            "type": "string"
+          },
+          "inwardNumberTracking": {
+            "type": "boolean"
+          },
+          "heatNumberTracking": {
+            "type": "boolean"
+          },
+          "shelfLifeApplicable": {
+            "type": "boolean"
+          },
+          "allowIssueIfExpired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignoreDayInExpiry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cannotSellExpiredInNextDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qcRequired": {
+            "type": "boolean"
+          },
+          "tpiRequired": {
+            "type": "boolean"
+          },
+          "tpiTriggerStage": {
+            "enum": [
+              "BeforeGrnForByItem",
+              "PostProduction",
+              "PreDispatch",
+              "PostDelivery"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "tpiCertificateMandatory": {
+            "type": "boolean"
+          },
+          "tpiCaptureRemarks": {
+            "type": "boolean"
+          },
+          "blockDispatchUntilTpiAccepted": {
+            "type": "boolean"
+          },
+          "allowTpiOverrideAtSo": {
+            "type": "boolean"
+          },
+          "indentMandatory": {
+            "type": "boolean"
+          },
+          "fastMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "slowMovingThreshold": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryReleaseLeadTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumProductionLogic": {
+            "type": "boolean"
+          },
+          "minimumProductionQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "productionBatchMultiple": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "autoAllocation": {
+            "type": "boolean"
+          },
+          "autoAllocationOn": {
+            "enum": [
+              "WoReceipt",
+              "ProductionBooking"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "bomQtyInDimensionsAndPieces": {
+            "type": "boolean"
+          },
+          "salesAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccountGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseAccount": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialOfConstruction": {
+            "type": "string",
+            "nullable": true
+          },
+          "standardWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hsnSacCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxPreference": {
+            "enum": [
+              "Taxable",
+              "NonTaxable"
+            ],
+            "type": "string"
+          },
+          "taxRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "countryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "salesPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "subContractingCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "discountEligible": {
+            "type": "boolean"
+          },
+          "isToolConsumable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "consumptionType": {
+            "enum": [
+              "OneTime",
+              "MultipleTimes",
+              "OverPeriod"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "consumptionNumberOfTimes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumptionPeriodValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumptionPeriodUnit": {
+            "enum": [
+              "Hours",
+              "Days",
+              "Months"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "consumptionStartBasis": {
+            "enum": [
+              "Grn",
+              "FirstIssue"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "maintenanceFrequencyValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maintenanceFrequencyUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "UsageCycles"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "calibrationRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "calibrationFrequencyValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "calibrationFrequencyUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "UsageCycles"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "maximumCapacity": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "postExhaustionAction": {
+            "enum": [
+              "MarkAsScrap",
+              "MoveToMaintenance",
+              "RemoveFromInventory"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "alternateUoms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemAlternateUomRequest"
+            },
+            "nullable": true
+          },
+          "technicalSpecs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemTechnicalSpecRequest"
+            },
+            "nullable": true
+          },
+          "drawings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemDrawingRequest"
+            },
+            "nullable": true
+          },
+          "warehouseThresholds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemWarehouseThresholdRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateItemSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "itemCodeMaxLength": {
+            "maximum": 50,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "allowItemLevelCustomization": {
+            "type": "boolean"
+          },
+          "logItemClassOverrides": {
+            "type": "boolean"
+          },
+          "allowDuplicateNames": {
+            "type": "boolean"
+          },
+          "allowTagNumberInSalesDocs": {
+            "type": "boolean"
+          },
+          "enableAutoBatchSerialGeneration": {
+            "type": "boolean"
+          },
+          "autoGenPrefix": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "autoGenSuffix": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "autoGenSeparator": {
+            "maxLength": 10,
+            "type": "string",
+            "nullable": true
+          },
+          "autoGenSequenceStart": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "autoGenSequenceIncrement": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "copyDescription": {
+            "type": "boolean"
+          },
+          "copyTechnicalSpecs": {
+            "type": "boolean"
+          },
+          "copyPricingDetails": {
+            "type": "boolean"
+          },
+          "copyTaxDetails": {
+            "type": "boolean"
+          },
+          "copyItemClassDefaults": {
+            "type": "boolean"
+          },
+          "copyAttachments": {
+            "type": "boolean"
+          },
+          "ecnEntryPermission": {
+            "type": "boolean"
+          },
+          "ccnNumberingBasis": {
+            "enum": [
+              "ParentItem",
+              "SalesJobOrder"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateItemVendorMappingRequest": {
+        "type": "object",
+        "properties": {
+          "vendorItemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorSku": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPreferredVendor": {
+            "type": "boolean"
+          },
+          "moq": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxOrderQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "eoq": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "standardLeadTimeDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warrantyDuration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "warrantyDurationUnit": {
+            "enum": [
+              "Days",
+              "Months",
+              "Years"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyStartBasis": {
+            "enum": [
+              "FromInvoiceDate",
+              "FromDeliveryDate",
+              "FromGrnDate"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseUoms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemVendorPurchaseUomRequest"
+            },
+            "nullable": true
+          },
+          "pricings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateItemVendorPricingRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePriceListRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "enum": [
+              "Draft",
+              "Active",
+              "Inactive",
+              "Expired"
+            ],
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetType": {
+            "enum": [
+              "AllCustomers",
+              "SpecificCustomers",
+              "AllVendors",
+              "SpecificVendors",
+              "Region"
+            ],
+            "type": "string"
+          },
+          "targetIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricingScopeType": {
+            "enum": [
+              "AllItems",
+              "SelectedItems",
+              "SelectedItemClasses"
+            ],
+            "type": "string"
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreatePriceListItemRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUomRequest": {
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

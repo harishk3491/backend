@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Items.API</name>
+    </assembly>
+    <members>
+        <member name="T:Items.API.Controllers.ItemClassesController">
+            <summary>Behavioral templates inherited by items.</summary>
+        </member>
+        <member name="M:Items.API.Controllers.ItemClassesController.GetAll(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a paginated list of active item classes.</summary>
+            <param name="page">Page number (1-based).</param>
+            <param name="pageSize">Number of records per page.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Paged list of item class summaries ordered by code.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemClassesController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a single item class by ID.</summary>
+            <param name="id">The item class ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The full item class record.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemClassesController.Create(Items.Application.ItemClasses.Dtos.CreateItemClassRequest,System.Threading.CancellationToken)">
+            <summary>Creates a new item class.</summary>
+            <param name="request">The item class to create.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created item class.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemClassesController.Update(System.Int32,Items.Application.ItemClasses.Dtos.UpdateItemClassRequest,System.Threading.CancellationToken)">
+            <summary>Updates an existing item class (ItemNature is non-editable post-create).</summary>
+            <param name="id">The item class ID to update.</param>
+            <param name="request">The updated item class values.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The updated item class.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemClassesController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>Soft-deletes an item class.</summary>
+            <param name="id">The item class ID to delete.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="M:Items.API.Controllers.ItemClassesController.Clone(System.Int32,Items.Application.ItemClasses.Dtos.CloneItemClassRequest,System.Threading.CancellationToken)">
+            <summary>Clones an item class with a new code and name.</summary>
+            <param name="id">The source item class ID.</param>
+            <param name="request">The new code and name for the clone.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created item class clone.</returns>
+        </member>
+        <member name="T:Items.API.Controllers.ItemsController">
+            <summary>Item master with sub-entities (alternate UOMs, specs, drawings, warehouse thresholds).</summary>
+        </member>
+        <member name="M:Items.API.Controllers.ItemsController.GetAll(System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{Items.Domain.Enums.ItemType},System.Nullable{Items.Domain.Enums.ItemNature},System.Threading.CancellationToken)">
+            <summary>Returns a paginated list of items; filterable by class, type, and nature.</summary>
+            <param name="page">Page number (1-based).</param>
+            <param name="pageSize">Number of records per page.</param>
+            <param name="itemClassId">Filter by item class ID.</param>
+            <param name="itemType">Filter by item type enum value.</param>
+            <param name="itemNature">Filter by item nature (Goods or Service).</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Paged list of item summaries.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a full item record including all sub-entities.</summary>
+            <param name="id">The item ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The full item with alternate UOMs, specs, drawings, and warehouse thresholds.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemsController.Create(Items.Application.Items.Dtos.CreateItemRequest,System.Threading.CancellationToken)">
+            <summary>Creates a new item with all sub-entities.</summary>
+            <param name="request">The item to create including alternate UOMs, specs, drawings, and thresholds.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created item.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemsController.Update(System.Int32,Items.Application.Items.Dtos.UpdateItemRequest,System.Threading.CancellationToken)">
+            <summary>Updates an item (ItemNature and dimension flags are non-editable post-create).</summary>
+            <param name="id">The item ID to update.</param>
+            <param name="request">The updated item values. Sub-entity collections are fully replaced.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The updated item.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemsController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>Soft-deletes an item (blocked if transaction history exists).</summary>
+            <param name="id">The item ID to delete.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="M:Items.API.Controllers.ItemsController.Clone(System.Int32,Items.Application.Items.Dtos.CloneItemRequest,System.Threading.CancellationToken)">
+            <summary>Deep-clones an item including all sub-entities.</summary>
+            <param name="id">The source item ID.</param>
+            <param name="request">The new name and SKU for the clone.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created item clone.</returns>
+        </member>
+        <member name="T:Items.API.Controllers.ItemSettingsController">
+            <summary>Global configuration singleton for the item module.</summary>
+        </member>
+        <member name="M:Items.API.Controllers.ItemSettingsController.Get(System.Threading.CancellationToken)">
+            <summary>Returns the singleton item settings record (defaults if never saved).</summary>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The current item settings.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemSettingsController.Upsert(Items.Application.ItemSettings.Dtos.UpdateItemSettingsRequest,System.Threading.CancellationToken)">
+            <summary>Creates or updates the singleton item settings.</summary>
+            <param name="request">The settings values to apply.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The updated item settings.</returns>
+        </member>
+        <member name="T:Items.API.Controllers.ItemVendorMappingsController">
+            <summary>Vendor-item purchase relationships including UOM grid and pricing slabs.</summary>
+        </member>
+        <member name="M:Items.API.Controllers.ItemVendorMappingsController.GetAll(System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>Returns a paginated list of vendor mappings; filterable by itemId and vendorId.</summary>
+            <param name="page">Page number (1-based).</param>
+            <param name="pageSize">Number of records per page.</param>
+            <param name="itemId">Filter by item ID.</param>
+            <param name="vendorId">Filter by vendor ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Paged list of vendor mapping summaries.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemVendorMappingsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a full vendor mapping with purchase UOM grid and pricing slabs.</summary>
+            <param name="id">The vendor mapping ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The full vendor mapping record.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemVendorMappingsController.Create(Items.Application.ItemVendorMappings.Dtos.CreateItemVendorMappingRequest,System.Threading.CancellationToken)">
+            <summary>Creates a vendor-item mapping with purchase UOM grid and pricing.</summary>
+            <param name="request">The vendor mapping to create.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created vendor mapping.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemVendorMappingsController.Update(System.Int32,Items.Application.ItemVendorMappings.Dtos.UpdateItemVendorMappingRequest,System.Threading.CancellationToken)">
+            <summary>Updates a vendor mapping (ItemId and VendorId are non-editable post-create).</summary>
+            <param name="id">The vendor mapping ID to update.</param>
+            <param name="request">The updated values. UOM grid and pricing collections are fully replaced.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The updated vendor mapping.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.ItemVendorMappingsController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>Soft-deletes a vendor mapping (blocked if referenced in an active PO).</summary>
+            <param name="id">The vendor mapping ID to delete.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="M:Items.API.Controllers.ItemVendorMappingsController.Clone(System.Int32,Items.Application.ItemVendorMappings.Dtos.CloneItemVendorMappingRequest,System.Threading.CancellationToken)">
+            <summary>Clones a vendor mapping, optionally targeting a different item or vendor.</summary>
+            <param name="id">The source vendor mapping ID.</param>
+            <param name="request">Optional override for target item or vendor; clone is never preferred by default.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created vendor mapping clone.</returns>
+        </member>
+        <member name="T:Items.API.Controllers.PriceListsController">
+            <summary>Sales and purchase price list headers with pricing slabs.</summary>
+        </member>
+        <member name="M:Items.API.Controllers.PriceListsController.GetAll(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a paginated list of price lists ordered by priority (highest first).</summary>
+            <param name="page">Page number (1-based).</param>
+            <param name="pageSize">Number of records per page.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Paged list of price list summaries.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.PriceListsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a price list with all pricing slabs.</summary>
+            <param name="id">The price list ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The price list with line items sorted by MinQty.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.PriceListsController.Create(Items.Application.PriceLists.Dtos.CreatePriceListRequest,System.Threading.CancellationToken)">
+            <summary>Creates a price list with pricing slabs.</summary>
+            <param name="request">The price list to create including line items.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created price list.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.PriceListsController.Update(System.Int32,Items.Application.PriceLists.Dtos.UpdatePriceListRequest,System.Threading.CancellationToken)">
+            <summary>Updates a price list (ApplicableTo is non-editable post-create).</summary>
+            <param name="id">The price list ID to update.</param>
+            <param name="request">The updated values. Line items collection is fully replaced.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The updated price list.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.PriceListsController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>Soft-deletes a price list (blocked if linked to an active SO or contract).</summary>
+            <param name="id">The price list ID to delete.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="M:Items.API.Controllers.PriceListsController.Clone(System.Int32,Items.Application.PriceLists.Dtos.ClonePriceListRequest,System.Threading.CancellationToken)">
+            <summary>Clones a price list as Draft with a new name.</summary>
+            <param name="id">The source price list ID.</param>
+            <param name="request">The new name for the clone.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created price list clone in Draft status.</returns>
+        </member>
+        <member name="T:Items.API.Controllers.UomsController">
+            <summary>Unit of measure lookup master.</summary>
+        </member>
+        <member name="M:Items.API.Controllers.UomsController.GetAll(System.Threading.CancellationToken)">
+            <summary>Returns all active UOMs.</summary>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>List of active UOMs ordered by code.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.UomsController.GetById(System.Int32,System.Threading.CancellationToken)">
+            <summary>Returns a single UOM by ID.</summary>
+            <param name="id">The UOM ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The requested UOM.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.UomsController.Create(Items.Application.Uoms.Dtos.CreateUomRequest,System.Threading.CancellationToken)">
+            <summary>Creates a new UOM.</summary>
+            <param name="request">The UOM to create.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The newly created UOM.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.UomsController.Update(System.Int32,Items.Application.Uoms.Dtos.UpdateUomRequest,System.Threading.CancellationToken)">
+            <summary>Updates an existing UOM.</summary>
+            <param name="id">The UOM ID to update.</param>
+            <param name="request">The updated UOM values.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>The updated UOM.</returns>
+        </member>
+        <member name="M:Items.API.Controllers.UomsController.Delete(System.Int32,System.Threading.CancellationToken)">
+            <summary>Soft-deletes a UOM (blocked if used on any item).</summary>
+            <param name="id">The UOM ID to delete.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet:*)",
+      "Bash(rm src/Items.Domain/Class1.cs src/Items.Application/Class1.cs src/Items.Infrastructure/Class1.cs src/Items.API/WeatherForecast.cs src/Items.API/Controllers/WeatherForecastController.cs)",
+      "Bash(rmdir src/Items.API/Controllers)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
+    ]
+  }
+}
