@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "D:\\Uniphore\\src\\Items\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\iitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\iitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{54935CE1-3BB2-300A-6B30-6DD67980CF1A}|src\\Items.API\\Items.API.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.api\\items.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{54935CE1-3BB2-300A-6B30-6DD67980CF1A}|src\\Items.API\\Items.API.csproj|solutionrelative:src\\items.api\\items.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\mappings\\itemmappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\mappings\\itemmappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\validators\\updateitemrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\validators\\updateitemrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\iitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\iitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\validators\\alternateuomrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\validators\\alternateuomrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\validators\\technicalspecrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\validators\\technicalspecrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\validators\\alternateuomrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\validators\\alternateuomrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.application\\items\\validators\\updateitemrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0769BC6-ADDC-604F-17C6-B756AE0FBCAE}|src\\Items.Application\\Items.Application.csproj|solutionrelative:src\\items.application\\items\\validators\\updateitemrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54935CE1-3BB2-300A-6B30-6DD67980CF1A}|src\\Items.API\\Items.API.csproj|d:\\uniphore\\src\\items\\backend\\src\\items.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54935CE1-3BB2-300A-6B30-6DD67980CF1A}|src\\Items.API\\Items.API.csproj|solutionrelative:src\\items.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,6 +43,30 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Items.API",
+              "DocumentMoniker": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.API\\Items.API.csproj",
+              "RelativeDocumentMoniker": "src\\Items.API\\Items.API.csproj",
+              "ToolTip": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.API\\Items.API.csproj",
+              "RelativeToolTip": "src\\Items.API\\Items.API.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-21T08:40:47.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Items.API\\Program.cs",
+              "ToolTip": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.API\\Program.cs",
+              "RelativeToolTip": "src\\Items.API\\Program.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T13:29:46.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "IItemService.cs",
               "DocumentMoniker": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.Application\\Items\\IItemService.cs",
               "RelativeDocumentMoniker": "src\\Items.Application\\Items\\IItemService.cs",
@@ -42,8 +74,7 @@
               "RelativeToolTip": "src\\Items.Application\\Items\\IItemService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T09:11:00.354Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T09:11:00.354Z"
             },
             {
               "$type": "Document",
@@ -53,25 +84,26 @@
               "RelativeDocumentMoniker": "src\\Items.Application\\Items\\Mappings\\ItemMappingProfile.cs",
               "ToolTip": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.Application\\Items\\Mappings\\ItemMappingProfile.cs",
               "RelativeToolTip": "src\\Items.Application\\Items\\Mappings\\ItemMappingProfile.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCUAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAQwCUAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T09:03:44.248Z"
+              "WhenOpened": "2026-04-14T09:03:44.248Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "UpdateItemRequestValidator.cs",
               "DocumentMoniker": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.Application\\Items\\Validators\\UpdateItemRequestValidator.cs",
               "RelativeDocumentMoniker": "src\\Items.Application\\Items\\Validators\\UpdateItemRequestValidator.cs",
               "ToolTip": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.Application\\Items\\Validators\\UpdateItemRequestValidator.cs",
               "RelativeToolTip": "src\\Items.Application\\Items\\Validators\\UpdateItemRequestValidator.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-14T08:34:47.22Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TechnicalSpecRequestValidator.cs",
               "DocumentMoniker": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.Application\\Items\\Validators\\TechnicalSpecRequestValidator.cs",
               "RelativeDocumentMoniker": "src\\Items.Application\\Items\\Validators\\TechnicalSpecRequestValidator.cs",
@@ -83,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "AlternateUomRequestValidator.cs",
               "DocumentMoniker": "D:\\Uniphore\\src\\Items\\backend\\src\\Items.Application\\Items\\Validators\\AlternateUomRequestValidator.cs",
               "RelativeDocumentMoniker": "src\\Items.Application\\Items\\Validators\\AlternateUomRequestValidator.cs",

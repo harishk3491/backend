@@ -9,3 +9,4 @@ D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.dl
 D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\refint\Items.Domain.dll
 D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.pdb
 D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\ref\Items.Domain.dll
+D:\Uniphore\src\Items\backend\src\Items.Domain\obj\Debug\net10.0\Items.Domain.sourcelink.json

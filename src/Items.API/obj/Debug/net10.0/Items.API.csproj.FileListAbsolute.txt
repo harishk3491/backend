@@ -180,3 +180,4 @@ D:\Uniphore\src\Items\backend\src\Items.API\bin\Debug\net10.0\Swashbuckle.AspNet
 D:\Uniphore\src\Items\backend\src\Items.API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Uniphore\src\Items\backend\src\Items.API\obj\Debug\net10.0\Items.API.xml
 D:\Uniphore\src\Items\backend\src\Items.API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+D:\Uniphore\src\Items\backend\src\Items.API\obj\Debug\net10.0\Items.API.sourcelink.json

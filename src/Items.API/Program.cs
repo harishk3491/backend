@@ -50,7 +50,15 @@ try
         c.UseInlineDefinitionsForEnums();
     });
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("Dev", policy =>
+            policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    });
+
     var app = builder.Build();
+
+    app.UseCors("Dev");
 
     // Seed database on startup (idempotent — skips tables that already have rows)
     using (var scope = app.Services.CreateScope())
